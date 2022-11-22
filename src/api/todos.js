@@ -1,3 +1,4 @@
+import uuid from "uuid";
 const url = "https://5b12-78-191-60-101.ngrok.io/todos";
 
 const headers = {
@@ -23,7 +24,7 @@ const addTodo = (title, description, todoOwnerMail) => {
     method: "POST",
     headers,
     body: JSON.stringify({
-      id: "1",
+      id: uuid.v4(),
       title: title,
       description: description,
       todoOwnerMail: todoOwnerMail,
@@ -138,3 +139,5 @@ const activeTodo = (todoId) => {
 
   return status;
 };
+
+export { getTodos, addTodo, editTodo, activeTodo, inactiveTodo };
