@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
 
-// RN Components
+// UI Components
 import { StyleSheet, View } from "react-native";
-
-// UI Kitten Components
 import { Text, Input, Button, Spinner } from "@ui-kitten/components";
 
-const url = "https://df71-213-74-98-226.ngrok.io/users";
+// api
+import { getUsers } from "../api/users";
 
 const LoginScreen = ({ navigation }) => {
-  // Credentials
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Login States
   const [validationText, setValidationText] = useState(null);
   const [isLogin, setIsLogin] = useState(false);
 
@@ -21,17 +18,7 @@ const LoginScreen = ({ navigation }) => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const getUsers = async () => {
-      await fetch(url)
-        .then((res) => res.json())
-        .then((res) => {
-          setUsers(res);
-          console.log(res);
-        })
-        .catch((e) => console.log(e));
-    };
-
-    getUsers();
+    getUsers().then((item) => setUsers(item));
   }, []);
 
   const validationHandle = () => {
@@ -45,7 +32,7 @@ const LoginScreen = ({ navigation }) => {
       return setValidationText("* Şifre boş bırakılamaz!");
     }
     return setValidationText(
-      "* Kullanıcı adı ya da şifresi geçersiz. Lütfen tekrar deneyiniz."
+      "* Mail ya da şifresi geçersiz. Lütfen tekrar deneyiniz."
     );
   };
 
