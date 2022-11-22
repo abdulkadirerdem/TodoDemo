@@ -1,19 +1,31 @@
 {
-  "posts": [
+  "todos": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "id": "1",
+      "title": "Test Title",
+      "description": "Test Description",
+      "todoOwnerMail": "user1@test.com",
+      "todoStatus": true
     }
   ],
-  "comments": [
+  "users": [
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": "1",
+      "mail": "user1@test.com",
+      "password": "user123",
+      "status": 0
+    },
+    {
+      "id": "2",
+      "mail": "user2@test.com",
+      "password": "user123",
+      "status": 0
+    },
+    {
+      "id": "3",
+      "mail": "manager@test.com",
+      "password": "manager123",
+      "status": 1
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
