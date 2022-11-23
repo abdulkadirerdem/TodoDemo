@@ -38,11 +38,11 @@ const LoginScreen = ({ navigation }) => {
 
   const signIn = (mail, password) => {
     setIsLogin(true);
-    let currentUser = users.filter(
-      (user) => user.mail === mail && user.password === password
-    );
+    let currentUser =
+      users &&
+      users.filter((user) => user.mail === mail && user.password === password);
 
-    if (currentUser.length === 0) {
+    if (currentUser == undefined || currentUser.length === 0) {
       setIsLogin(false);
       validationHandle();
     } else {
