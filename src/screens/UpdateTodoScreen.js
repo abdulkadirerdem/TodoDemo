@@ -54,7 +54,7 @@ const UpdateTodoScreen = (props) => {
           <Button
             onPress={() => {
               setVisible(false);
-              props.navigation.goBack();
+              props.navigation.navigate("Home");
             }}
           >
             Go Back
