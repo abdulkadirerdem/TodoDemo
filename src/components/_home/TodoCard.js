@@ -1,5 +1,8 @@
 import React from "react";
 
+// Date Format
+import moment from "moment";
+
 // UI Components
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Card, Text } from "@ui-kitten/components";
@@ -48,7 +51,9 @@ const cardFooter = (footerProps, info) => (
     <Text category="c1" style={{ fontWeight: "900" }}>
       {info.item.todoOwnerMail}
     </Text>
-    <Text category="c2">{info.item.createdDate}</Text>
+    <Text category="c2">
+      {moment(info.item.createdDate).format("dddd, MMM DD at HH:mm a")}
+    </Text>
   </View>
 );
 
