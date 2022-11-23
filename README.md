@@ -2,7 +2,7 @@
 # Todo Demo
 
 Hi,
-This app is a basically a to-do app that uses ngrok for json db.
+This app is basically a to-do app that uses ngrok for json db.
 
 To start application (after -npm install-):
 - 
@@ -11,7 +11,7 @@ To start application (after -npm install-):
     3. expo start
 
 Config:
-- The url from the tunnel should be replaced with the url from todos and users.
+- The url from the tunnel must be replaced with the url from todos and users.
 - todos -> /src/api/todos
 - users -> /src/api/users
 ## Screenshots
