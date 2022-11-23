@@ -15,6 +15,8 @@ const HomeScreen = (props) => {
   // add todo
   const [reqIsSuccess, setReqIsSuccess] = useState({});
 
+  const [isErrorOccur, setIsErrorOccur] = useState(false);
+
   const getAllTodos = () => {
     getTodos().then((todos) => {
       if (currentlyUser.fullAccess) {
@@ -36,12 +38,19 @@ const HomeScreen = (props) => {
     const focusHandler = props.navigation.addListener("focus", () => {
       getAllTodos();
     });
-    return focusHandler;
-  }, [props.navigation]);
 
-  // useEffect(() => {
-  //   getAllTodos();
-  // }, []);
+    if (todos !== undefined) {
+      setIsErrorOccur(false);
+    }
+
+    return focusHandler;
+  }, [props.navigation, isErrorOccur]);
+
+  useEffect(() => {
+    if (todos === undefined) {
+      setIsErrorOccur(true);
+    }
+  }, [todos]);
 
   const updateTodos = () => {
     getAllTodos();
@@ -51,6 +60,9 @@ const HomeScreen = (props) => {
   useEffect(() => {
     if (reqIsSuccess?.isSuccess) {
       updateTodos();
+    }
+    if (todos !== undefined) {
+      setIsErrorOccur(false);
     }
   }, [reqIsSuccess]);
 

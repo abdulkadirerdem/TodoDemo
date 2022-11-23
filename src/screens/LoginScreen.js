@@ -14,12 +14,23 @@ const LoginScreen = ({ navigation }) => {
   const [validationText, setValidationText] = useState(null);
   const [isLogin, setIsLogin] = useState(false);
 
+  const [isErrorOccur, setIsErrorOccur] = useState(false);
+
   // Datas
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     getUsers().then((item) => setUsers(item));
-  }, []);
+    if (users !== undefined) {
+      setIsErrorOccur(false);
+    }
+  }, [isErrorOccur]);
+
+  useEffect(() => {
+    if (users === undefined) {
+      setIsErrorOccur(true);
+    }
+  }, [users]);
 
   const validationHandle = () => {
     if (mail === "" && password === "") {
