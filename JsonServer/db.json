@@ -1,10 +1,19 @@
 {
   "todos": [
     {
-      "id": "1",
-      "title": "Test Title",
-      "description": "Test Description",
+      "id": "52797255-c20e-4c99-b4b5-b8ea33324d32",
+      "title": "Lorem Ipsum",
+      "description": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
       "todoOwnerMail": "user1@test.com",
+      "createdDate": "2022-11-23T11:03:13.730Z",
+      "todoStatus": true
+    },
+    {
+      "id": "7985baf2-8278-4287-9fa8-c1c91948ff46",
+      "title": "Lorem Ipsum",
+      "description": "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
+      "todoOwnerMail": "user1@test.com",
+      "createdDate": "2022-11-23T11:03:13.730Z",
       "todoStatus": true
     }
   ],
@@ -13,19 +22,19 @@
       "id": "1",
       "mail": "user1@test.com",
       "password": "user123",
-      "status": 0
+      "fullAccess": false
     },
     {
       "id": "2",
       "mail": "user2@test.com",
       "password": "user123",
-      "status": 0
+      "fullAccess": false
     },
     {
       "id": "3",
       "mail": "manager@test.com",
       "password": "manager123",
-      "status": 1
+      "fullAccess": true
     }
   ]
 }

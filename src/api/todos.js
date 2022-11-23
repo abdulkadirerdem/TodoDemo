@@ -1,19 +1,24 @@
 import uuid from "uuid";
-const url = "https://dcfd-95-0-140-150.ngrok.io/todos";
+const url = `https://9ebd-78-191-60-101.ngrok.io/todos`;
 
 const headers = {
   "Content-Type": "application/json",
-  Accept: "application/json",
+  Accept: "application/json, text/plain, */*",
 };
 
 const getTodos = async () => {
   let todos;
-  await fetch(url)
+  await fetch(url, {
+    method: "GET",
+    headers,
+  })
     .then((res) => res.json())
     .then((res) => {
-      todos = res;
+      todos = res.sort(
+        (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+      );
     })
-    .catch((e) => console.log(e));
+    .catch((e) => console.log(e, "ERROR"));
 
   return todos;
 };
@@ -52,16 +57,13 @@ const addTodo = async (title, description, todoOwnerMail) => {
   return status;
 };
 
-const editTodo = async (todoId, title, description) => {
+const editTodo = async (todoId, data) => {
   let status;
 
   await fetch(url + `/${todoId}`, {
     method: "PUT",
     headers,
-    body: JSON.stringify({
-      title: title,
-      description: description,
-    }),
+    body: JSON.stringify(data),
   })
     .then((res) => res.json())
     .then((resJson) => {
@@ -82,19 +84,18 @@ const editTodo = async (todoId, title, description) => {
   return status;
 };
 
-const inactiveTodo = async (todoId) => {
+const inactiveTodo = async (todoId, todo) => {
   let status;
+  todo.todoStatus = false;
 
   await fetch(url + `/${todoId}`, {
     method: "PUT",
     headers,
-    body: JSON.stringify({
-      todoStatus: false,
-    }),
+    body: JSON.stringify(todo),
   })
-    .then((res) => res.json())
-    .then((resJson) => {
-      console.log("updated:", resJson);
+    // .then((res) => res.json())
+    .then(() => {
+      // console.log("updated:", resJson);
       status = {
         isSuccess: true,
         message: "Başarılı.",
@@ -111,15 +112,14 @@ const inactiveTodo = async (todoId) => {
   return status;
 };
 
-const activeTodo = async (todoId) => {
+const activeTodo = async (todoId, todo) => {
   let status;
+  todo.todoStatus = true;
 
   await fetch(url + `/${todoId}`, {
     method: "PUT",
     headers,
-    body: JSON.stringify({
-      todoStatus: true,
-    }),
+    body: JSON.stringify(todo),
   })
     .then((res) => res.json())
     .then((resJson) => {

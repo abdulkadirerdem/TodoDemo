@@ -1,8 +1,16 @@
-const url = "https://dcfd-95-0-140-150.ngrok.io/users";
+const url = `https://9ebd-78-191-60-101.ngrok.io/users`;
+
+const headers = {
+  "Content-Type": "application/json",
+  Accept: "application/json, text/plain, */*",
+};
 
 const getUsers = async () => {
   let users;
-  await fetch(url)
+  await fetch(url, {
+    method: "GET",
+    headers,
+  })
     .then((res) => res.json())
     .then((res) => {
       users = res;
