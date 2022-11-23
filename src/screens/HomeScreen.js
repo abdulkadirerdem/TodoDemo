@@ -6,13 +6,7 @@ import { StyleSheet, View } from "react-native";
 import { List, Text } from "@ui-kitten/components";
 
 // api
-import {
-  getTodos,
-  addTodo,
-  editTodo,
-  activeTodo,
-  inactiveTodo,
-} from "../api/todos";
+import { getTodos, addTodo, activeTodo, inactiveTodo } from "../api/todos";
 import TodoCard from "../components/_home/TodoCard";
 
 const HomeScreen = (props) => {
@@ -21,8 +15,8 @@ const HomeScreen = (props) => {
   // add todo
   const [reqIsSuccess, setReqIsSuccess] = useState({});
 
-  useEffect(() => {
-    getTodos().then(async (todos) => {
+  const getAllTodos = () => {
+    getTodos().then((todos) => {
       if (currentlyUser.fullAccess) {
         setTodos(todos);
       } else {
@@ -35,22 +29,22 @@ const HomeScreen = (props) => {
         );
       }
     });
-  }, []);
+  };
+
+  useEffect(() => {
+    getAllTodos();
+    const focusHandler = props.navigation.addListener("focus", () => {
+      getAllTodos();
+    });
+    return focusHandler;
+  }, [props.navigation]);
+
+  // useEffect(() => {
+  //   getAllTodos();
+  // }, []);
 
   const updateTodos = () => {
-    getTodos().then((todos) => {
-      if (currentlyUser.fullAccess) {
-        setTodos(todos);
-      } else {
-        setTodos(
-          todos.filter(
-            (todo) =>
-              todo.todoOwnerMail === currentlyUser.mail &&
-              todo.todoStatus === true
-          )
-        );
-      }
-    });
+    getAllTodos();
     setReqIsSuccess({});
   };
 
@@ -96,7 +90,6 @@ const HomeScreen = (props) => {
             <TodoCard
               info={data}
               navigate={props.navigation.navigate}
-              editTodoHandle={editTodoHandle}
               todoStatusHanlde={todoStatusHanlde}
             />
           )}
