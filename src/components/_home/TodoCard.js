@@ -2,18 +2,19 @@ import React from "react";
 
 // UI Components
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { Button, Card, Text } from "@ui-kitten/components";
+import { Card, Text } from "@ui-kitten/components";
 
 // Icons
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
-const renderItemHeader = (
-  headerProps,
-  info,
-  editTodoHandle,
-  todoStatusHanlde,
-  navigate
-) => (
+// Logs
+import { LogBox } from "react-native";
+
+LogBox.ignoreLogs([
+  "Non-serializable values were found in the navigation state",
+]);
+
+const cardHeader = (headerProps, info, todoStatusHanlde, navigate) => (
   <View {...headerProps} style={[styles.displayFlex, styles.cardHeader]}>
     <Text category="h5">{info.item.title}</Text>
     <View style={[styles.displayFlex, styles.headerButtons]}>
@@ -21,43 +22,28 @@ const renderItemHeader = (
         style={[styles.button]}
         onPress={() => navigate("UpdateTodoScreen", info)}
       >
-        <MaterialIcons
-          name="edit"
-          size={25}
-          color={"green"}
-          style={styles.categoryIcon}
-        />
+        <MaterialIcons name="edit" size={25} color={"green"} />
       </TouchableOpacity>
       {info.item.todoStatus ? (
         <TouchableOpacity
           style={[styles.button]}
           onPress={() => todoStatusHanlde("passive", info.item.id, info.item)}
         >
-          <MaterialIcons
-            name="delete"
-            size={25}
-            color={"#b30000"}
-            style={styles.categoryIcon}
-          />
+          <MaterialIcons name="delete" size={25} color={"#b30000"} />
         </TouchableOpacity>
       ) : (
         <TouchableOpacity
           style={[styles.button]}
           onPress={() => todoStatusHanlde("active", info.item.id, info.item)}
         >
-          <MaterialIcons
-            name="replay"
-            size={25}
-            color={"#b30000"}
-            style={styles.categoryIcon}
-          />
+          <MaterialIcons name="replay" size={25} color={"#b30000"} />
         </TouchableOpacity>
       )}
     </View>
   </View>
 );
 
-const renderItemFooter = (footerProps, info) => (
+const cardFooter = (footerProps, info) => (
   <View {...footerProps} style={[styles.displayFlex, styles.cardFooter]}>
     <Text category="c1" style={{ fontWeight: "900" }}>
       {info.item.todoOwnerMail}
@@ -66,21 +52,15 @@ const renderItemFooter = (footerProps, info) => (
   </View>
 );
 
-const TodoCard = ({ info, navigate, editTodoHandle, todoStatusHanlde }) => {
+const TodoCard = ({ info, navigate, todoStatusHanlde }) => {
   return (
     <Card
       style={styles.item}
       status="basic"
       header={(headerProps) =>
-        renderItemHeader(
-          headerProps,
-          info,
-          editTodoHandle,
-          todoStatusHanlde,
-          navigate
-        )
+        cardHeader(headerProps, info, todoStatusHanlde, navigate)
       }
-      footer={(footerProps) => renderItemFooter(footerProps, info)}
+      footer={(footerProps) => cardFooter(footerProps, info)}
     >
       <Text category="s1">{info.item.description}</Text>
     </Card>
