@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import AddTodoModal from "../components/_home/AddTodoModal";
 
 // UI Component
 import { StyleSheet, View } from "react-native";
@@ -7,6 +6,9 @@ import { List, Text } from "@ui-kitten/components";
 
 // api
 import { getTodos, addTodo, activeTodo, inactiveTodo } from "../api/todos";
+
+// Custom Components
+import AddTodoModal from "../components/_home/AddTodoModal";
 import TodoCard from "../components/_home/TodoCard";
 
 const HomeScreen = (props) => {
