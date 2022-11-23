@@ -4,27 +4,10 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, Card, Input, Modal } from "@ui-kitten/components";
 
-// api
-import { getTodos, addTodo } from "../../api/todos";
-
-const AddTodoModal = (currentlyUser) => {
+const AddTodoModal = (addTodoHandle) => {
   const [visible, setVisible] = useState(false);
-  const [reqIsSuccess, setReqIsSuccess] = useState({});
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
-  const updateTodos = () => {
-    getTodos();
-    setTitle("");
-    setDescription("");
-    setReqIsSuccess({});
-  };
-
-  useEffect(() => {
-    if (reqIsSuccess?.isSuccess) {
-      updateTodos();
-    }
-  }, [reqIsSuccess]);
 
   return (
     <>
@@ -76,9 +59,13 @@ const AddTodoModal = (currentlyUser) => {
               size="small"
               appearance="filled"
               onPress={() => {
-                addTodo(title, description, currentlyUser.mail).then((info) =>
-                  setReqIsSuccess(info)
-                );
+                let data = {
+                  title,
+                  description,
+                };
+                addTodoHandle(data);
+                setTitle("");
+                setDescription("");
                 setVisible(false);
               }}
             >
