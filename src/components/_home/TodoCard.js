@@ -7,13 +7,19 @@ import { Button, Card, Text } from "@ui-kitten/components";
 // Icons
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
-const renderItemHeader = (headerProps, info) => (
+const renderItemHeader = (
+  headerProps,
+  info,
+  editTodoHandle,
+  todoStatusHanlde,
+  navigate
+) => (
   <View {...headerProps} style={[styles.displayFlex, styles.cardHeader]}>
     <Text category="h5">{info.item.title}</Text>
     <View style={[styles.displayFlex, styles.headerButtons]}>
       <TouchableOpacity
         style={[styles.button]}
-        onPress={() => console.log(pressed)}
+        onPress={() => navigate("UpdateTodoScreen", info)}
       >
         <MaterialIcons
           name="edit"
@@ -25,7 +31,7 @@ const renderItemHeader = (headerProps, info) => (
       {info.item.todoStatus ? (
         <TouchableOpacity
           style={[styles.button]}
-          onPress={() => console.log(pressed)}
+          onPress={() => todoStatusHanlde("passive", info.item.id, info.item)}
         >
           <MaterialIcons
             name="delete"
@@ -37,7 +43,7 @@ const renderItemHeader = (headerProps, info) => (
       ) : (
         <TouchableOpacity
           style={[styles.button]}
-          onPress={() => console.log(pressed)}
+          onPress={() => todoStatusHanlde("active", info.item.id, info.item)}
         >
           <MaterialIcons
             name="replay"
@@ -60,12 +66,20 @@ const renderItemFooter = (footerProps, info) => (
   </View>
 );
 
-const TodoCard = (info) => {
+const TodoCard = ({ info, navigate, editTodoHandle, todoStatusHanlde }) => {
   return (
     <Card
       style={styles.item}
       status="basic"
-      header={(headerProps) => renderItemHeader(headerProps, info)}
+      header={(headerProps) =>
+        renderItemHeader(
+          headerProps,
+          info,
+          editTodoHandle,
+          todoStatusHanlde,
+          navigate
+        )
+      }
       footer={(footerProps) => renderItemFooter(footerProps, info)}
     >
       <Text category="s1">{info.item.description}</Text>
