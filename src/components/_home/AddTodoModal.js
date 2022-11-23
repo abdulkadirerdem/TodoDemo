@@ -53,6 +53,8 @@ const AddTodoModal = (currentlyUser) => {
             style={styles.marginBottomStyle}
           />
           <Input
+            multiline
+            textStyle={{ minHeight: 64 }}
             placeholder="Description"
             value={description}
             status="basic"
@@ -100,7 +102,6 @@ const styles = StyleSheet.create({
   },
   modalStyle: { width: "70%" },
   marginBottomStyle: { marginBottom: 7.5 },
-  button: {},
   backdrop: {
     backgroundColor: "rgba(0, 0, 0, 0.25)",
   },
