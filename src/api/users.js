@@ -1,4 +1,4 @@
-const url = "https://5b12-78-191-60-101.ngrok.io/users";
+const url = "https://d731-95-0-140-150.ngrok.io/users";
 
 const getUsers = async () => {
   let users;

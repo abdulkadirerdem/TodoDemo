@@ -1,5 +1,5 @@
 import uuid from "uuid";
-const url = "https://5b12-78-191-60-101.ngrok.io/todos";
+const url = "https://d731-95-0-140-150.ngrok.io/todos";
 
 const headers = {
   "Content-Type": "application/json",
@@ -18,9 +18,9 @@ const getTodos = async () => {
   return todos;
 };
 
-const addTodo = (title, description, todoOwnerMail) => {
+const addTodo = async (title, description, todoOwnerMail) => {
   let status;
-  fetch(url, {
+  await fetch(url, {
     method: "POST",
     headers,
     body: JSON.stringify({
@@ -28,7 +28,7 @@ const addTodo = (title, description, todoOwnerMail) => {
       title: title,
       description: description,
       todoOwnerMail: todoOwnerMail,
-      createdDate: "",
+      createdDate: new Date(),
       todoStatus: true,
     }),
   })
@@ -52,10 +52,10 @@ const addTodo = (title, description, todoOwnerMail) => {
   return status;
 };
 
-const editTodo = (todoId, title, description) => {
+const editTodo = async (todoId, title, description) => {
   let status;
 
-  fetch(url + `/${todoId}`, {
+  await fetch(url + `/${todoId}`, {
     method: "PUT",
     headers,
     body: JSON.stringify({
@@ -82,10 +82,10 @@ const editTodo = (todoId, title, description) => {
   return status;
 };
 
-const inactiveTodo = (todoId) => {
+const inactiveTodo = async (todoId) => {
   let status;
 
-  fetch(url + `/${todoId}`, {
+  await fetch(url + `/${todoId}`, {
     method: "PUT",
     headers,
     body: JSON.stringify({
@@ -111,10 +111,10 @@ const inactiveTodo = (todoId) => {
   return status;
 };
 
-const activeTodo = (todoId) => {
+const activeTodo = async (todoId) => {
   let status;
 
-  fetch(url + `/${todoId}`, {
+  await fetch(url + `/${todoId}`, {
     method: "PUT",
     headers,
     body: JSON.stringify({
